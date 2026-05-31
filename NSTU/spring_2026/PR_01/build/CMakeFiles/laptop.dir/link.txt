@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/laptop.dir/laptop.c.o CMakeFiles/laptop.dir/main.c.o -o laptop 
