@@ -28,24 +28,48 @@ bool check_min_symb(const char* str){
         return true;
 }
 
-
-validation_errors is_not_valid(const laptop* lap){
+validation_errors is_not_valid_manufacturer(const laptop* lap){
     if(!check_not_only_space(lap->manufacturer)){
         return ERR0R_MANUFACTURER_EMPTY;
     }
     if(!check_min_symb(lap->manufacturer)){
         return ERR0R_MANUFACTURER_MIN_SYMB;
     }
+    return CORRECT;
+}
+
+validation_errors is_not_valid_cpu(const laptop* lap){
     if(!check_not_only_space(lap->model_CPU)){
         return ERR0R_CPU_EMPTY;
     }
     if(!check_min_symb(lap->model_CPU)){
         return ERR0R_CPU_MIN_SYMB;
     }
+    return CORRECT;
+}
+
+validation_errors is_not_valid_gpu(const laptop* lap){
     if(lap->have_GPU != true && lap->have_GPU != false){
         return ERROR_GPU_EMPTY;
     }
     return CORRECT;
+}
+
+validation_errors is_not_valid(const laptop* lap){
+    validation_errors tmp = CORRECT;
+    tmp = is_not_valid_manufacturer(&lap);
+    if(tmp){
+        return tmp;
+    }
+    tmp = is_not_valid_cpu(&lap);
+    if(tmp){
+        return tmp;
+    }
+    tmp = is_not_valid_gpu(&lap);
+    if(tmp){
+        return tmp;
+    }
+    return tmp;
 }
 
 
@@ -65,6 +89,18 @@ void errors_output(validation_errors err){
     return 0;
 }
 
+bool laptop_init_default(laptop* lap){
+    strcpy(lap->manufacturer, "None");
+    strcpy(lap->model_CPU, "None");
+    lap->have_GPU = false;
+    validation_errors res = is_not_valid(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
+}
+
 
 bool laptop_init(laptop* lap, const char* man, const char* cpu, const bool gpu){
     strcpy(lap->manufacturer, man);
@@ -78,7 +114,7 @@ bool laptop_init(laptop* lap, const char* man, const char* cpu, const bool gpu){
     return true;
 }
 
-bool laptop_init(laptop* lap, const laptop* cpy_lap){
+bool laptop_init_cpy(laptop* lap, const laptop* cpy_lap){
     strcpy(lap->manufacturer, cpy_lap->manufacturer);
     strcpy(lap->model_CPU, cpy_lap->model_CPU);
     lap->have_GPU = cpy_lap->have_GPU;
@@ -94,4 +130,34 @@ void laptop_output(laptop* lap){
     printf("Manufacturer: %s\n", lap->manufacturer);
     printf("CPU: %s\n", lap->model_CPU);
     printf("Manufacturer: %s\n", lap->have_GPU ? "true" : "false");
+}
+
+bool lap_set_CPU(laptop* lap, const char* cpu){
+    strcpy(lap->model_CPU, cpu);
+    validation_errors res = is_not_valid_cpu(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
+}
+
+bool lap_set_manufacturer(laptop* lap, const char* man){
+    strcpy(lap->manufacturer, man);
+    validation_errors res = is_not_valid_manufacturer(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
+}
+
+bool lap_set_gpu(laptop* lap, const bool gpu){
+    lap->have_GPU = gpu;
+    validation_errors res = is_not_valid_gpu(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
 }

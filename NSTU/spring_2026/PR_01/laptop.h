@@ -23,3 +23,19 @@ struct Laptop{
     char model_CPU[STRING_MAX];
     bool have_GPU;
 } typedef laptop;
+
+bool is_symb(char c);
+bool check_not_only_space(const char* str);
+bool check_min_symb(const char* str);
+validation_errors is_not_valid_manufacturer(const laptop* lap);
+validation_errors is_not_valid_cpu(const laptop* lap);
+validation_errors is_not_valid_gpu(const laptop* lap);
+validation_errors is_not_valid(const laptop* lap);
+void errors_output(validation_errors err);
+bool laptop_init_default(laptop* lap);
+bool laptop_init(laptop* lap, const char* man, const char* cpu, const bool gpu);
+bool laptop_init_cpy(laptop* lap, const laptop* cpy_lap);
+void laptop_output(laptop* lap);
+bool lap_set_CPU(laptop* lap, const char* cpu);
+bool lap_set_manufacturer(laptop* lap, const char* man);
+bool lap_set_gpu(laptop* lap, const bool gpu);
