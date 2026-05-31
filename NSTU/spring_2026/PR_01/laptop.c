@@ -89,3 +89,9 @@ bool laptop_init(laptop* lap, const laptop* cpy_lap){
     }
     return true;
 }
+
+void laptop_output(laptop* lap){
+    printf("Manufacturer: %s\n", lap->manufacturer);
+    printf("CPU: %s\n", lap->model_CPU);
+    printf("Manufacturer: %s\n", lap->have_GPU ? "true" : "false");
+}
