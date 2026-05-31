@@ -29,7 +29,7 @@ bool check_min_symb(const char* str){
 }
 
 
-validation_errors is_valid(const laptop* lap){
+validation_errors is_not_valid(const laptop* lap){
     if(!check_not_only_space(lap->manufacturer)){
         return ERR0R_MANUFACTURER_EMPTY;
     }
@@ -49,3 +49,43 @@ validation_errors is_valid(const laptop* lap){
 }
 
 
+void errors_output(validation_errors err){
+    switch(err){
+        case ERR0R_CPU_EMPTY:
+            printf("ERR0R:CPU is empty");
+        case ERR0R_CPU_MIN_SYMB:
+            printf("ERR0R:CPU is need more 3 symbols");
+        case ERR0R_MANUFACTURER_EMPTY:
+            printf("ERR0R:Manufacturer is empty");
+        case ERR0R_MANUFACTURER_MIN_SYMB:
+            printf("ERR0R:Manufacturer is need more 3 symbols");
+        case ERROR_GPU_EMPTY:
+            printf("ERR0R:GPU is empty");
+    }
+    return 0;
+}
+
+
+bool laptop_init(laptop* lap, const char* man, const char* cpu, const bool gpu){
+    strcpy(lap->manufacturer, man);
+    strcpy(lap->model_CPU, cpu);
+    lap->have_GPU = gpu;
+    validation_errors res = is_not_valid(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
+}
+
+bool laptop_init(laptop* lap, const laptop* cpy_lap){
+    strcpy(lap->manufacturer, cpy_lap->manufacturer);
+    strcpy(lap->model_CPU, cpy_lap->model_CPU);
+    lap->have_GPU = cpy_lap->have_GPU;
+    validation_errors res = is_not_valid(&lap);
+    if(res){
+        errors_output(res);
+        return false;
+    }
+    return true;
+}
