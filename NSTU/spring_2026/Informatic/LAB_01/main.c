@@ -15,7 +15,7 @@ int toDigit(int* A,int a){
 int main(){
     int vv = 5000;
     int A[4], B[5], M[9];
-    while(vv <= 9999; ++vv){
+    for(;vv <= 9999; ++vv){
         toDigit(A, vv);
 
         for(int i = 0; i < 9; M[i++] = 0);
@@ -42,7 +42,7 @@ int main(){
 
         if(B[0] == B[3]) continue;
 
-        printf("ОДИН = %d; МНОГО = %d", vv, vv*2);
+        printf("ОДИН = %d; МНОГО = %d\n", vv, vv*2);
         break;
     }
 
