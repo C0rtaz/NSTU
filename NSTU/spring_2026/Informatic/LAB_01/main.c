@@ -1,5 +1,3 @@
-// Числовой ребус: ОДИН + ОДИН = МНОГО
-
 #include <stdio.h>
 
 int toDigit(int* A,int a){
