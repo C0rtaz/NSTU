@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/mvd.dir/main.cpp.o CMakeFiles/mvd.dir/people.cpp.o -o mvd 

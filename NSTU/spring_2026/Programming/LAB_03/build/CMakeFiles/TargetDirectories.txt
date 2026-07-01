@@ -1,0 +1,3 @@
+/home/crtaz/nstuts_proj/NSTU/spring_2026/Programming/LAB_03/build/CMakeFiles/mvd.dir
+/home/crtaz/nstuts_proj/NSTU/spring_2026/Programming/LAB_03/build/CMakeFiles/edit_cache.dir
+/home/crtaz/nstuts_proj/NSTU/spring_2026/Programming/LAB_03/build/CMakeFiles/rebuild_cache.dir
