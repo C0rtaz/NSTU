@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/lab_04.dir/main.cpp.o CMakeFiles/lab_04.dir/people.cpp.o -o lab_04 
